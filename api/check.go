@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/sej95/wechatai/config"
+	"github.com/pwh-pwh/aiwechat-vercel/config"
 )
 
 func Check(rw http.ResponseWriter, req *http.Request) {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/pwh-pwh/aiwechat-vercel/config"
+	"github.com/sej95/wechatai/config"
 )
 
 func Check(rw http.ResponseWriter, req *http.Request) {
@@ -17,6 +17,6 @@ func Check(rw http.ResponseWriter, req *http.Request) {
 			res = fmt.Sprintf("%v\n%v: %v", res, bot, status)
 		}
 	}
-	res = fmt.Sprintf("%v\nDEFAULT BOT 2: %v", res, botType)
+	res = fmt.Sprintf("%v\nDEFAULT BOT 3: %v", res, botType)
 	fmt.Fprint(rw, res)
 }

@@ -17,6 +17,6 @@ func Check(rw http.ResponseWriter, req *http.Request) {
 			res = fmt.Sprintf("%v\n%v: %v", res, bot, status)
 		}
 	}
-	res = fmt.Sprintf("%v\nDEFAULT BOT: %v", res, botType)
+	res = fmt.Sprintf("%v\nDEFAULT BOT 2: %v", res, botType)
 	fmt.Fprint(rw, res)
 }

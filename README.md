@@ -10,7 +10,7 @@
 
 - 提前到Vercel创建Redis数据库
   - Dashboard--Storage--Create--KV Redis
-![image](https://github.com/pwh-pwh/aiwechat-vercel/assets/24500520/523f9aec-faaf-415a-8cb9-520041a06d58)
+![image](https://github.com/sej95/wechatai/assets/24500520/523f9aec-faaf-415a-8cb9-520041a06d58)
 
 - Fork本Github项目，到Vercel点击构建,环境变量填写参数
 - 在vercel该项目详情页面的Storage选择连接前面创建的redis数据库
@@ -43,7 +43,7 @@ botType=** 机器人类型 目前支持(gpt,echo,spark,qwen,gemini)例如botType
 
 录制了一期简单的视频教程供参考[b站](https://b23.tv/BNWDKu1)
 
-也有大佬写了自己在cloudflare部署的教程[discussions](https://github.com/pwh-pwh/aiwechat-vercel/discussions/22)
+也有大佬写了自己在cloudflare部署的教程[discussions](https://github.com/sej95/wechatai/discussions/22)
 
 ### 功能支持
 
@@ -100,9 +100,9 @@ botType=** 机器人类型 目前支持(gpt,echo,spark,qwen,gemini)例如botType
 5. 发送信息返回错误error, status code: 403, message: invalid character '<' looking for beginning of value怎么回事?答:检查GPT_URL是不是漏了/v1或者cf开了盾，墙之类的
 6. 支持接入deepseek吗?答:支持，不过有一点要注意deepseek支持的模型为deepseek-coder，deepseek-chat要正常使用，需要改gptModel为这两个模型之一
 7. 修改环境变量后，还是不成功?答:在修改环境变量后要重新部署下配置才后生效，因为vercel原来的实例没有被销毁读取的还是未修改的环境变量。建议每次修改环境变量后手动重新部署一下
-8. 微信字数限制如何解决?答:已经有大佬提pr了，可以通过设置最大token解决，设置环境变量maxOutput即可，一般设置到500，回答没有完整可以和ai说继续即可，pr详情[pr](https://github.com/pwh-pwh/aiwechat-vercel/pull/36)
+8. 微信字数限制如何解决?答:已经有大佬提pr了，可以通过设置最大token解决，设置环境变量maxOutput即可，一般设置到500，回答没有完整可以和ai说继续即可，pr详情[pr](https://github.com/sej95/wechatai/pull/36)
 
-更多功能探讨[discussions](https://github.com/pwh-pwh/aiwechat-vercel/discussions)
+更多功能探讨[discussions](https://github.com/sej95/wechatai/discussions)
 
 ### Star History
 ![Star History Chart](https://api.star-history.com/svg?repos=pwh-pwh/aiwechat-vercel&type=Date)

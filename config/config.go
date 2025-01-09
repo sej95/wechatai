@@ -8,7 +8,7 @@ import (
 	"sync"
 	"strconv"
 
-	"github.com/pwh-pwh/aiwechat-vercel/db"
+	"github.com/sej95/wechatai/db"
 )
 
 const (

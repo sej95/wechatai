@@ -1,4 +1,4 @@
-module github.com/pwh-pwh/aiwechat-vercel
+module github.com/sej95/wechatai
 
 go 1.21
 

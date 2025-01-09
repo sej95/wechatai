@@ -3,7 +3,7 @@ package chat
 import (
 	_ "errors"
 	"fmt"
-	"github.com/pwh-pwh/aiwechat-vercel/client"
+	"github.com/sej95/wechatai/client"
 	"os"
 	"strconv"
 	"strings"
@@ -11,10 +11,10 @@ import (
 
 	"github.com/google/generative-ai-go/genai"
 
-	"github.com/pwh-pwh/aiwechat-vercel/db"
+	"github.com/sej95/wechatai/db"
 	"github.com/sashabaranov/go-openai"
 
-	"github.com/pwh-pwh/aiwechat-vercel/config"
+	"github.com/sej95/wechatai/config"
 	"github.com/silenceper/wechat/v2/officialaccount/message"
 )
 

@@ -5,8 +5,8 @@ import (
 
 	"os"
 
-	"github.com/pwh-pwh/aiwechat-vercel/config"
-	"github.com/pwh-pwh/aiwechat-vercel/db"
+	"github.com/sej95/wechatai/config"
+	"github.com/sej95/wechatai/db"
 	"github.com/sashabaranov/go-openai"
 )
 

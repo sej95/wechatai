@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/google/generative-ai-go/genai"
-	"github.com/pwh-pwh/aiwechat-vercel/config"
-	"github.com/pwh-pwh/aiwechat-vercel/db"
+	"github.com/sej95/wechatai/config"
+	"github.com/sej95/wechatai/db"
 	"google.golang.org/api/option"
 )
 

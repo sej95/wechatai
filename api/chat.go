@@ -3,7 +3,7 @@ package api
 import (
 	"os"
 	"fmt"
-	"github.com/pwh-pwh/aiwechat-vercel/chat"
+	"github.com/sej95/wechatai/chat"
 	"golang.org/x/text/encoding/simplifiedchinese"
 	"net/http"
 )

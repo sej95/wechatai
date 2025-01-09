@@ -11,11 +11,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pwh-pwh/aiwechat-vercel/db"
+	"github.com/sej95/wechatai/db"
 
 	"github.com/bytedance/sonic"
 	"github.com/gorilla/websocket"
-	"github.com/pwh-pwh/aiwechat-vercel/config"
+	"github.com/sej95/wechatai/config"
 )
 
 type SparkChat struct {

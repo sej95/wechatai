@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/joho/godotenv"
-	"github.com/pwh-pwh/aiwechat-vercel/config"
-	"github.com/pwh-pwh/aiwechat-vercel/db"
+	"github.com/sej95/wechatai/config"
+	"github.com/sej95/wechatai/db"
 )
 
 func TestQwenChat(t *testing.T) {

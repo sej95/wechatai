@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/bytedance/sonic"
-	"github.com/pwh-pwh/aiwechat-vercel/config"
+	"github.com/sej95/wechatai/config"
 	"github.com/silenceper/wechat/v2"
 	"github.com/silenceper/wechat/v2/cache"
 	oaConfig "github.com/silenceper/wechat/v2/officialaccount/config"

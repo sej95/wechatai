@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/pwh-pwh/aiwechat-vercel/chat"
-	"github.com/pwh-pwh/aiwechat-vercel/config"
+	"github.com/sej95/wechatai/chat"
+	"github.com/sej95/wechatai/config"
 	"github.com/silenceper/wechat/v2"
 	"github.com/silenceper/wechat/v2/cache"
 	offConfig "github.com/silenceper/wechat/v2/officialaccount/config"

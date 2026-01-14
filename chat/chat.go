@@ -48,6 +48,9 @@ var actionMap = map[string]func(param, userId string) string{
 	config.Wx_Todo_Del:  DelTodo,
 
 	config.Wx_Coin: GetCoin,
+	config.Wx_Command_IPTV: func(param, userId string) string {
+		return "请入群回复哦"
+	},
 }
 
 func DoAction(userId, msg string) (r string, flag bool) {

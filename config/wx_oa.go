@@ -33,8 +33,6 @@ const (
 	Wx_Todo_List = "/tl"
 
 	Wx_Coin = "/cb"
-
-	Wx_Command_IPTV = "/IPTV"
 )
 
 var (

@@ -49,7 +49,7 @@ var actionMap = map[string]func(param, userId string) string{
 
 	config.Wx_Coin: GetCoin,
 	"/iptv": func(param, userId string) string {
-		return "请关注后入群回复哦，还有别的需要吗"
+		return "我是主人的GPT助理，感谢您的关注！ 这个问题需要关注后入群回复哦，别的问题可以陪你聊呢"
 	},
 }
 

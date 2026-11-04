@@ -209,26 +209,67 @@ func GetPrompt(param string, userId string) string {
 func AddKeyword(param, userId string) string {
 	parts := strings.SplitN(param, ":", 2)
 	if len(parts) != 2 {
-		return "添加关键词失败，格式应为：关键词:回复内容"
+		return "添加关键词失败，格式应为：关键词1,关键词2:回复内容"
 	}
-	keyword := strings.TrimSpace(parts[0])
+	keywordsStr := strings.TrimSpace(parts[0])
 	reply := strings.TrimSpace(parts[1])
 
-	err := db.SetKeywordReply(keyword, reply)
-	if err != nil {
-		return fmt.Sprintf("添加关键词失败：%s", err.Error())
+	// 支持中英文逗号、空格、斜杠、竖线分隔多个关键词
+	separators := func(r rune) bool {
+		return r == ',' || r == '，' || r == '|' || r == '/' || r == ' '
 	}
-	return fmt.Sprintf("关键词 '%s' 添加成功！", keyword)
+	keywordList := strings.FieldsFunc(keywordsStr, separators)
+
+	if len(keywordList) == 0 {
+		return "添加关键词失败：未识别到有效关键词"
+	}
+
+	var added []string
+	for _, kw := range keywordList {
+		kw = strings.TrimSpace(kw)
+		if kw != "" {
+			err := db.SetKeywordReply(kw, reply)
+			if err != nil {
+				return fmt.Sprintf("添加关键词 '%s' 失败：%s", kw, err.Error())
+			}
+			added = append(added, kw)
+		}
+	}
+
+	return fmt.Sprintf("成功添加 %d 个关键词 [%s]！", len(added), strings.Join(added, "、"))
 }
 
 func DelKeyword(param, userId string) string {
-	keyword := strings.TrimSpace(param)
-	err := db.RemoveKeyword(keyword)
-	if err != nil {
-		return fmt.Sprintf("删除关键词失败：%s", err.Error())
+	param = strings.TrimSpace(param)
+	if param == "" {
+		return "删除关键词失败，格式应为：/delkeyword 关键词1,关键词2"
 	}
-	return fmt.Sprintf("关键词 '%s' 删除成功！", keyword)
+
+	// 支持中英文逗号、空格、斜杠、竖线分隔批量删除
+	separators := func(r rune) bool {
+		return r == ',' || r == '，' || r == '|' || r == '/' || r == ' '
+	}
+	keywordList := strings.FieldsFunc(param, separators)
+
+	if len(keywordList) == 0 {
+		return "未识别到需要删除的关键词"
+	}
+
+	var deleted []string
+	for _, kw := range keywordList {
+		kw = strings.TrimSpace(kw)
+		if kw != "" {
+			err := db.RemoveKeyword(kw)
+			if err != nil {
+				return fmt.Sprintf("删除关键词 '%s' 失败：%s", kw, err.Error())
+			}
+			deleted = append(deleted, kw)
+		}
+	}
+
+	return fmt.Sprintf("成功删除 %d 个关键词 [%s]！", len(deleted), strings.Join(deleted, "、"))
 }
+
 
 func ListKeywords(param, userId string) string {
 	replies, err := db.GetKeywordReplies()

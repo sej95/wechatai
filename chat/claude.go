@@ -106,9 +106,9 @@ func (s *ClaudeChat) chat(userId, msg string) string {
 		Stream:    false,
 	}
 	
-	// Remove max_tokens if it's 0 or negative
+	// Default max_tokens to 1024 if it's 0 or negative, as Anthropic API requires max_tokens
 	if s.maxTokens <= 0 {
-		reqBody.MaxTokens = 0
+		reqBody.MaxTokens = 1024
 	}
 	
 	// Convert request to JSON

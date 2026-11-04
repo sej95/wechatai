@@ -66,12 +66,18 @@ func (s *GeminiChat) chat(userId, msg string) string {
 	if err != nil {
 		return err.Error()
 	}
-	text := resp.Candidates[0].Content.Parts[0].(genai.Text)
+	if len(resp.Candidates) == 0 || resp.Candidates[0].Content == nil || len(resp.Candidates[0].Content.Parts) == 0 {
+		return "回复失败：内容可能触发了安全策略拦截。"
+	}
+	textPart, ok := resp.Candidates[0].Content.Parts[0].(genai.Text)
+	if !ok {
+		return "回复格式不受支持"
+	}
 	msgs = append(msgs, &genai.Content{Parts: []genai.Part{
-		text,
+		textPart,
 	}, Role: GeminiBot})
 	SaveMsgListWithDb(config.Bot_Type_Gemini, userId, msgs, s.toDbMsg)
-	return string(text)
+	return string(textPart)
 }
 
 func (g *GeminiChat) Chat(userId string, msg string) string {

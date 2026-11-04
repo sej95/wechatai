@@ -1,17 +1,16 @@
 package api
 
 import (
-	"os"
 	"fmt"
-	"github.com/sej95/wechatai/chat"
-	"golang.org/x/text/encoding/simplifiedchinese"
 	"net/http"
+	"os"
+
+	"github.com/sej95/wechatai/chat"
 )
 
 func Chat(rw http.ResponseWriter, req *http.Request) {
 	accessCode := os.Getenv("accessCode")
-	code := req.URL.Query().Get("code")
-	if code != accessCode {
+	if accessCode != "" && req.URL.Query().Get("code") != accessCode {
 		fmt.Fprint(rw, "No valid query code provided.")
 		return
 	}
@@ -23,10 +22,7 @@ func Chat(rw http.ResponseWriter, req *http.Request) {
 	}
 	bot := chat.GetChatBot(botType)
 	rpn := bot.Chat("admin", msg)
-	s, err := simplifiedchinese.GBK.NewEncoder().String(rpn)
-	if err != nil {
-		fmt.Fprint(rw, err.Error())
-		return
-	}
-	fmt.Fprint(rw, s)
+
+	rw.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	fmt.Fprint(rw, rpn)
 }

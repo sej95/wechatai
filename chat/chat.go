@@ -176,6 +176,7 @@ func SwitchUserBot(userId string, botType string) string {
 
 func SetPrompt(param, userId string) string {
 	botType := config.GetUserBotType(userId)
+	param = strings.TrimLeft(strings.TrimSpace(param), ":： ")
 	switch botType {
 	case config.Bot_Type_Gpt:
 		db.SetPrompt(userId, botType, param)
@@ -214,12 +215,10 @@ func AddKeyword(param, userId string) string {
 	keywordsStr := strings.TrimSpace(parts[0])
 	reply := strings.TrimSpace(parts[1])
 
-	// 支持中英文逗号、空格、斜杠、竖线分隔多个关键词
 	separators := func(r rune) bool {
 		return r == ',' || r == '，' || r == '|' || r == '/' || r == ' '
 	}
 	keywordList := strings.FieldsFunc(keywordsStr, separators)
-
 	if len(keywordList) == 0 {
 		return "添加关键词失败：未识别到有效关键词"
 	}
@@ -235,7 +234,6 @@ func AddKeyword(param, userId string) string {
 			added = append(added, kw)
 		}
 	}
-
 	return fmt.Sprintf("成功添加 %d 个关键词 [%s]！", len(added), strings.Join(added, "、"))
 }
 
@@ -245,12 +243,10 @@ func DelKeyword(param, userId string) string {
 		return "删除关键词失败，格式应为：/delkeyword 关键词1,关键词2"
 	}
 
-	// 支持中英文逗号、空格、斜杠、竖线分隔批量删除
 	separators := func(r rune) bool {
 		return r == ',' || r == '，' || r == '|' || r == '/' || r == ' '
 	}
 	keywordList := strings.FieldsFunc(param, separators)
-
 	if len(keywordList) == 0 {
 		return "未识别到需要删除的关键词"
 	}
@@ -266,10 +262,8 @@ func DelKeyword(param, userId string) string {
 			deleted = append(deleted, kw)
 		}
 	}
-
 	return fmt.Sprintf("成功删除 %d 个关键词 [%s]！", len(deleted), strings.Join(deleted, "、"))
 }
-
 
 func ListKeywords(param, userId string) string {
 	replies, err := db.GetKeywordReplies()
@@ -381,7 +375,9 @@ func WithTimeChat(userId, msg string, f func(userId, msg string) string) string 
 	case res := <-resChan:
 		return res
 	case <-time.After(5 * time.Second):
-		config.Cache.Store(userId+msg, <-resChan)
+		go func() {
+			config.Cache.Store(userId+msg, <-resChan)
+		}()
 		return ""
 	}
 }
